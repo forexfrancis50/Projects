@@ -3,3 +3,4 @@ numpy
 pandas
 numpy_financial
 plotly.express
+openpyxl
