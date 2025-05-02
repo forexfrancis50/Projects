@@ -1,0 +1,307 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNey/iuESIORSp2H0TXxcz4",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/forexfrancis50/Projects/blob/main/MYBOTS\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "ytuTxDD4LLBm",
+        "outputId": "a0a03c3a-a7c1-4a8e-80ce-02df91758cfe"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting yagmail\n",
+            "  Downloading yagmail-0.15.293-py2.py3-none-any.whl.metadata (2.9 kB)\n",
+            "Requirement already satisfied: tweepy in /usr/local/lib/python3.11/dist-packages (4.15.0)\n",
+            "Collecting praw\n",
+            "  Downloading praw-7.8.1-py3-none-any.whl.metadata (9.4 kB)\n",
+            "Collecting schedule\n",
+            "  Downloading schedule-1.2.2-py3-none-any.whl.metadata (3.8 kB)\n",
+            "Collecting instagrapi\n",
+            "  Downloading instagrapi-2.1.3.tar.gz (102 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m102.6/102.6 kB\u001b[0m \u001b[31m3.7 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25h  Preparing metadata (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "Collecting ngrok\n",
+            "  Downloading ngrok-1.4.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (19 kB)\n",
+            "Collecting premailer (from yagmail)\n",
+            "  Downloading premailer-3.10.0-py2.py3-none-any.whl.metadata (15 kB)\n",
+            "Requirement already satisfied: oauthlib<4,>=3.2.0 in /usr/local/lib/python3.11/dist-packages (from tweepy) (3.2.2)\n",
+            "Requirement already satisfied: requests<3,>=2.27.0 in /usr/local/lib/python3.11/dist-packages (from tweepy) (2.32.3)\n",
+            "Requirement already satisfied: requests-oauthlib<3,>=1.2.0 in /usr/local/lib/python3.11/dist-packages (from tweepy) (2.0.0)\n",
+            "Collecting prawcore<3,>=2.4 (from praw)\n",
+            "  Downloading prawcore-2.4.0-py3-none-any.whl.metadata (5.0 kB)\n",
+            "Collecting update_checker>=0.18 (from praw)\n",
+            "  Downloading update_checker-0.18.0-py3-none-any.whl.metadata (2.3 kB)\n",
+            "Requirement already satisfied: websocket-client>=0.54.0 in /usr/local/lib/python3.11/dist-packages (from praw) (1.8.0)\n",
+            "Requirement already satisfied: PySocks==1.7.1 in /usr/local/lib/python3.11/dist-packages (from instagrapi) (1.7.1)\n",
+            "Collecting pydantic==2.10.1 (from instagrapi)\n",
+            "  Downloading pydantic-2.10.1-py3-none-any.whl.metadata (169 kB)\n",
+            "\u001b[2K     \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m169.7/169.7 kB\u001b[0m \u001b[31m5.8 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hCollecting pycryptodomex==3.21.0 (from instagrapi)\n",
+            "  Downloading pycryptodomex-3.21.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.4 kB)\n",
+            "Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.11/dist-packages (from pydantic==2.10.1->instagrapi) (0.7.0)\n",
+            "Collecting pydantic-core==2.27.1 (from pydantic==2.10.1->instagrapi)\n",
+            "  Downloading pydantic_core-2.27.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)\n",
+            "Requirement already satisfied: typing-extensions>=4.12.2 in /usr/local/lib/python3.11/dist-packages (from pydantic==2.10.1->instagrapi) (4.13.2)\n",
+            "Requirement already satisfied: charset-normalizer<4,>=2 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27.0->tweepy) (3.4.1)\n",
+            "Requirement already satisfied: idna<4,>=2.5 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27.0->tweepy) (3.10)\n",
+            "Requirement already satisfied: urllib3<3,>=1.21.1 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27.0->tweepy) (2.4.0)\n",
+            "Requirement already satisfied: certifi>=2017.4.17 in /usr/local/lib/python3.11/dist-packages (from requests<3,>=2.27.0->tweepy) (2025.4.26)\n",
+            "Requirement already satisfied: lxml in /usr/local/lib/python3.11/dist-packages (from premailer->yagmail) (5.4.0)\n",
+            "Collecting cssselect (from premailer->yagmail)\n",
+            "  Downloading cssselect-1.3.0-py3-none-any.whl.metadata (2.6 kB)\n",
+            "Collecting cssutils (from premailer->yagmail)\n",
+            "  Downloading cssutils-2.11.1-py3-none-any.whl.metadata (8.7 kB)\n",
+            "Requirement already satisfied: cachetools in /usr/local/lib/python3.11/dist-packages (from premailer->yagmail) (5.5.2)\n",
+            "Requirement already satisfied: more-itertools in /usr/local/lib/python3.11/dist-packages (from cssutils->premailer->yagmail) (10.7.0)\n",
+            "Downloading yagmail-0.15.293-py2.py3-none-any.whl (17 kB)\n",
+            "Downloading praw-7.8.1-py3-none-any.whl (189 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m189.3/189.3 kB\u001b[0m \u001b[31m13.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading schedule-1.2.2-py3-none-any.whl (12 kB)\n",
+            "Downloading pycryptodomex-3.21.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.3 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m2.3/2.3 MB\u001b[0m \u001b[31m46.9 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading pydantic-2.10.1-py3-none-any.whl (455 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m455.3/455.3 kB\u001b[0m \u001b[31m26.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading pydantic_core-2.27.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m2.1/2.1 MB\u001b[0m \u001b[31m56.6 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading ngrok-1.4.0-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m3.1/3.1 MB\u001b[0m \u001b[31m65.1 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hDownloading prawcore-2.4.0-py3-none-any.whl (17 kB)\n",
+            "Downloading update_checker-0.18.0-py3-none-any.whl (7.0 kB)\n",
+            "Downloading premailer-3.10.0-py2.py3-none-any.whl (19 kB)\n",
+            "Downloading cssselect-1.3.0-py3-none-any.whl (18 kB)\n",
+            "Downloading cssutils-2.11.1-py3-none-any.whl (385 kB)\n",
+            "\u001b[2K   \u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\u001b[0m \u001b[32m385.7/385.7 kB\u001b[0m \u001b[31m18.3 MB/s\u001b[0m eta \u001b[36m0:00:00\u001b[0m\n",
+            "\u001b[?25hBuilding wheels for collected packages: instagrapi\n",
+            "  Building wheel for instagrapi (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for instagrapi: filename=instagrapi-2.1.3-py3-none-any.whl size=116362 sha256=c70ebdee3eeb6e69d0ead1e9ef4411b509ac7095b548b0fe48676df9c745cfe3\n",
+            "  Stored in directory: /root/.cache/pip/wheels/31/c0/63/7ad4ef727751385676d1987f63b99b76c56adbbd043c17aa59\n",
+            "Successfully built instagrapi\n",
+            "Installing collected packages: schedule, pydantic-core, pycryptodomex, ngrok, cssutils, cssselect, update_checker, pydantic, premailer, prawcore, yagmail, praw, instagrapi\n",
+            "  Attempting uninstall: pydantic-core\n",
+            "    Found existing installation: pydantic_core 2.33.1\n",
+            "    Uninstalling pydantic_core-2.33.1:\n",
+            "      Successfully uninstalled pydantic_core-2.33.1\n",
+            "  Attempting uninstall: pydantic\n",
+            "    Found existing installation: pydantic 2.11.3\n",
+            "    Uninstalling pydantic-2.11.3:\n",
+            "      Successfully uninstalled pydantic-2.11.3\n",
+            "Successfully installed cssselect-1.3.0 cssutils-2.11.1 instagrapi-2.1.3 ngrok-1.4.0 praw-7.8.1 prawcore-2.4.0 premailer-3.10.0 pycryptodomex-3.21.0 pydantic-2.10.1 pydantic-core-2.27.1 schedule-1.2.2 update_checker-0.18.0 yagmail-0.15.293\n"
+          ]
+        }
+      ],
+      "source": [
+        "!pip install yagmail tweepy praw schedule instagrapi ngrok\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install --quiet yagmail tweepy praw instagrapi schedule python-dotenv\n"
+      ],
+      "metadata": {
+        "id": "n8uV-6j1L1Rr"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import os\n",
+        "from dotenv import load_dotenv\n",
+        "\n",
+        "# You can also manually set env variables in Colab with os.environ['KEY'] = 'value'\n",
+        "load_dotenv()\n",
+        "\n",
+        "EMAIL_USER = os.getenv(\"EMAIL_USER\")\n",
+        "EMAIL_PASS = os.getenv(\"EMAIL_PASS\")  # Gmail App Password\n",
+        "\n",
+        "TWITTER_API_KEY = os.getenv(\"TWITTER_API_KEY\")\n",
+        "TWITTER_API_SECRET = os.getenv(\"TWITTER_API_SECRET\")\n",
+        "TWITTER_ACCESS_TOKEN = os.getenv(\"TWITTER_ACCESS_TOKEN\")\n",
+        "TWITTER_ACCESS_SECRET = os.getenv(\"TWITTER_ACCESS_SECRET\")\n",
+        "\n",
+        "REDDIT_CLIENT_ID = os.getenv(\"REDDIT_CLIENT_ID\")\n",
+        "REDDIT_SECRET = os.getenv(\"REDDIT_SECRET\")\n",
+        "REDDIT_USER_AGENT = os.getenv(\"REDDIT_USER_AGENT\")\n",
+        "\n",
+        "# Instagram credentials if needed\n",
+        "INSTA_USERNAME = os.getenv(\"INSTA_USERNAME\")\n",
+        "INSTA_PASSWORD = os.getenv(\"INSTA_PASSWORD\")\n"
+      ],
+      "metadata": {
+        "id": "pzNHGtDfMG60"
+      },
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import yagmail\n",
+        "\n",
+        "def send_email(recipient, subject, message):\n",
+        "    yag = yagmail.SMTP(EMAIL_USER, EMAIL_PASS)\n",
+        "    yag.send(to=recipient, subject=subject, contents=message)\n",
+        "    print(f\"✅ Email sent to {recipient}\")\n",
+        "\n",
+        "# Example\n",
+        "# send_email(\"your_target@example.com\", \"Colab Bot\", \"Hello from the cloud!\")\n"
+      ],
+      "metadata": {
+        "id": "AirghnkjMJzL"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import tweepy\n",
+        "\n",
+        "def twitter_post(message):\n",
+        "    auth = tweepy.OAuth1UserHandler(\n",
+        "        TWITTER_API_KEY, TWITTER_API_SECRET,\n",
+        "        TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_SECRET\n",
+        "    )\n",
+        "    api = tweepy.API(auth)\n",
+        "    api.update_status(message)\n",
+        "    print(\"✅ Tweet posted.\")\n",
+        "\n",
+        "# Example\n",
+        "# twitter_post(\"This is an automated tweet from your generalist bot.\")\n"
+      ],
+      "metadata": {
+        "id": "amQ-cs3vMPYA"
+      },
+      "execution_count": 5,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import praw\n",
+        "\n",
+        "def reddit_post(subreddit_name, title, body):\n",
+        "    reddit = praw.Reddit(\n",
+        "        client_id=REDDIT_CLIENT_ID,\n",
+        "        client_secret=REDDIT_SECRET,\n",
+        "        user_agent=REDDIT_USER_AGENT,\n",
+        "    )\n",
+        "    subreddit = reddit.subreddit(subreddit_name)\n",
+        "    subreddit.submit(title, selftext=body)\n",
+        "    print(f\"✅ Posted to r/{subreddit_name}\")\n",
+        "\n",
+        "# Example\n",
+        "# reddit_post(\"test\", \"Test Post\", \"This is a test from Colab bot.\")\n"
+      ],
+      "metadata": {
+        "id": "SAS7uSdEMRV4"
+      },
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from instagrapi import Client\n",
+        "\n",
+        "def instagram_post(image_path, caption):\n",
+        "    cl = Client()\n",
+        "    cl.login(INSTA_USERNAME, INSTA_PASSWORD)\n",
+        "    cl.photo_upload(image_path, caption)\n",
+        "    print(\"✅ Posted to Instagram.\")\n",
+        "\n",
+        "# Example\n",
+        "# instagram_post(\"test.jpg\", \"This is a test upload from Colab bot.\")\n"
+      ],
+      "metadata": {
+        "id": "Zmv51aguMUWJ"
+      },
+      "execution_count": 7,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import schedule\n",
+        "import time\n",
+        "\n",
+        "# Define task set\n",
+        "def hourly_tasks():\n",
+        "    twitter_post(\"Hourly status update.\")\n",
+        "    send_email(\"you@example.com\", \"Hourly Bot Update\", \"Another hour has passed.\")\n",
+        "    # More tasks can be added here\n",
+        "\n",
+        "# Set up schedule\n",
+        "schedule.every().hour.do(hourly_tasks)\n",
+        "\n",
+        "print(\"⏳ Scheduler started...\")\n",
+        "while True:\n",
+        "    schedule.run_pending()\n",
+        "    time.sleep(1)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 203
+        },
+        "id": "stCEmYJNMYic",
+        "outputId": "a997c8e3-b27c-45db-964c-21f54e897a58"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "⏳ Scheduler started...\n"
+          ]
+        },
+        {
+          "output_type": "error",
+          "ename": "KeyboardInterrupt",
+          "evalue": "",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mKeyboardInterrupt\u001b[0m                         Traceback (most recent call last)",
+            "\u001b[0;32m<ipython-input-8-cdc5b86da014>\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m     14\u001b[0m \u001b[0;32mwhile\u001b[0m \u001b[0;32mTrue\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     15\u001b[0m     \u001b[0mschedule\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mrun_pending\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 16\u001b[0;31m     \u001b[0mtime\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msleep\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;31mKeyboardInterrupt\u001b[0m: "
+          ]
+        }
+      ]
+    }
+  ]
+}
